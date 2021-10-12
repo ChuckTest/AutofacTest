@@ -14,6 +14,9 @@ namespace WebApplicationMvc.Controllers
 
         public ActionResult Index()
         {
+            var instance = DependencyResolver.Current.GetService<ValidationHelperBase<Student>>();
+            instance.CheckExist(1);
+
             StudentValidationHelper.CheckExist(1);
             return View();
         }
