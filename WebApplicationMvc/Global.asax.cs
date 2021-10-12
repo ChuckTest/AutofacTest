@@ -8,6 +8,7 @@ using System.Web.Routing;
 using Autofac;
 using Autofac.Integration.Mvc;
 using WebApplicationMvc.Helper.Validation;
+using WebApplicationMvc.Models;
 
 namespace WebApplicationMvc
 {
@@ -36,6 +37,10 @@ namespace WebApplicationMvc
             // Set the dependency resolver to be Autofac.
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
+
+            var instance = container.Resolve(typeof(ValidationHelperBase<Student>));
+            ValidationHelperBase<Student> v = instance as ValidationHelperBase<Student>;
+            v.CheckExist(1);
         }
     }
 }
