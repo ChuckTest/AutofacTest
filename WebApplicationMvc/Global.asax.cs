@@ -7,6 +7,7 @@ using System.Web.Optimization;
 using System.Web.Routing;
 using Autofac;
 using Autofac.Integration.Mvc;
+using WebApplicationMvc.Helper.Validation;
 
 namespace WebApplicationMvc
 {
@@ -27,6 +28,11 @@ namespace WebApplicationMvc
             var builder = new ContainerBuilder();
 
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
+
+            builder.RegisterGeneric(typeof(ValidationHelperBase<>))
+                .AsSelf()
+                .AsImplementedInterfaces()
+                .InstancePerRequest();
 
             // Set the dependency resolver to be Autofac.
             var container = builder.Build();

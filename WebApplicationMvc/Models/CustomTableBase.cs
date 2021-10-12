@@ -9,4 +9,13 @@ namespace WebApplicationMvc.Models
     {
         public int CustomTableItemId { get; set; }
     }
+
+    public class Student : CustomTableBase
+    {
+        public string FirstName { get; set; }
+
+        public string LastName { get; set; }
+
+        public int Age { get; set; }
+    }
 }

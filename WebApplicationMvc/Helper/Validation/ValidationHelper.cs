@@ -8,7 +8,7 @@ namespace WebApplicationMvc.Helper.Validation
 {
     public class ValidationHelperBase<T> where T : CustomTableBase
     {
-        protected virtual void CheckExist(int customTableItemId)
+        public virtual void CheckExist(int customTableItemId)
         {
            //do logic check, and throw exception when check failed
         }
