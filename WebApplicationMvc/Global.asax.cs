@@ -37,10 +37,9 @@ namespace WebApplicationMvc
             // Set the dependency resolver to be Autofac.
             var container = builder.Build();
             DependencyResolver.SetResolver(new AutofacDependencyResolver(container));
-
-            var instance = container.Resolve(typeof(ValidationHelperBase<Student>));
-            ValidationHelperBase<Student> v = instance as ValidationHelperBase<Student>;
-            v.CheckExist(1);
+            
+            var instance = DependencyResolver.Current.GetService<ValidationHelperBase<Student>>();
+            instance.CheckExist(1);
         }
     }
 }
