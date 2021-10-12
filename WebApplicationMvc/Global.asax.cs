@@ -30,8 +30,7 @@ namespace WebApplicationMvc
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
 
             builder.RegisterGeneric(typeof(ValidationHelperBase<>))
-                .AsSelf()
-                .AsImplementedInterfaces()
+                .AsSelf().PropertiesAutowired()
                 .InstancePerRequest();
 
             // Set the dependency resolver to be Autofac.
