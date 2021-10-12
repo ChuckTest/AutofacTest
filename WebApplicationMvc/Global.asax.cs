@@ -30,7 +30,8 @@ namespace WebApplicationMvc
 
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
 
-            builder.RegisterGeneric(typeof(ValidationHelperBase<>));
+            builder.RegisterGeneric(typeof(ValidationHelperBase<>)).PropertiesAutowired();
+            builder.RegisterGeneric(typeof(List<>)).PropertiesAutowired();
 
             // Set the dependency resolver to be Autofac.
             var container = builder.Build();

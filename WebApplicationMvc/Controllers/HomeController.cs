@@ -12,10 +12,19 @@ namespace WebApplicationMvc.Controllers
     {
         public ValidationHelperBase<Student> StudentValidationHelper { get; set; }
 
+        public List<Student> StudentList { get; set; }
+
         public ActionResult Index()
         {
             var instance = DependencyResolver.Current.GetService<ValidationHelperBase<Student>>();
             instance.CheckExist(1);
+
+            Student student = new Student();
+            var students = DependencyResolver.Current.GetService<List<Student>>();
+            students.Add(student);
+            Console.WriteLine(students.Count);
+
+            StudentList.Add(student);
 
             StudentValidationHelper.CheckExist(1);
             return View();
