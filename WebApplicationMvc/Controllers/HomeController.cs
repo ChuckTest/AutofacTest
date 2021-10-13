@@ -12,7 +12,7 @@ namespace WebApplicationMvc.Controllers
     {
         public ValidationHelperBase<Student> StudentValidationHelper { get; set; }
 
-        public List<Student> StudentList { get; set; }
+        public IList<Student> StudentList { get; set; }
 
         public ActionResult Index()
         {
@@ -20,7 +20,7 @@ namespace WebApplicationMvc.Controllers
             instance.CheckExist(1);
 
             Student student = new Student();
-            var students = DependencyResolver.Current.GetService<List<Student>>();
+            var students = DependencyResolver.Current.GetService<IList<Student>>();
             students.Add(student);
             Console.WriteLine(students.Count);
 

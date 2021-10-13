@@ -31,8 +31,10 @@ namespace WebApplicationMvc
             builder.RegisterControllers(typeof(MvcApplication).Assembly);
 
             builder.RegisterGeneric(typeof(ValidationHelperBase<>)).PropertiesAutowired();
-            builder.RegisterGeneric(typeof(List<>)).PropertiesAutowired();
-            builder.RegisterType(typeof(ValidationHelperBase<>)).PropertiesAutowired();
+            builder.RegisterGeneric(typeof(List<>)).As(typeof(IList<>)).PropertiesAutowired();
+            //builder.RegisterGeneric(typeof(List<>)).As(typeof(IList<>)).InstancePerDependency();
+            //builder.RegisterGeneric(typeof(UnitOfWork<>)).As(typeof(IUnitOfWork<>)).InstancePerDependency();
+            //builder.RegisterType(typeof(ValidationHelperBase<>)).PropertiesAutowired();
 
             // Set the dependency resolver to be Autofac.
             var container = builder.Build();
@@ -42,4 +44,42 @@ namespace WebApplicationMvc
             instance.CheckExist(1);
         }
     }
+}
+
+
+public class UnitOfWork<E> : IUnitOfWork<E> where E : BaseEntity
+{
+    private readonly Repository<E> repository;
+
+    public UnitOfWork(Repository<E> repository)
+    {
+        this.repository = repository;
+    }
+
+    //.. other methods
+
+    public void SaveChanges()
+    {
+        throw new NotImplementedException();
+    }
+
+    public void Dispose()
+    {
+        throw new NotImplementedException();
+    }
+}
+
+public interface IUnitOfWork<E> : IDisposable where E : BaseEntity
+{
+    void SaveChanges();
+}
+
+public class BaseEntity
+{
+
+}
+
+public class Repository<T> where T : BaseEntity
+{
+
 }
