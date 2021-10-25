@@ -28,7 +28,7 @@ namespace WebApplicationMvc
         {
             var builder = new ContainerBuilder();
 
-            builder.RegisterControllers(typeof(MvcApplication).Assembly);
+            builder.RegisterControllers(typeof(MvcApplication).Assembly).PropertiesAutowired();
 
             builder.RegisterGeneric(typeof(ValidationHelperBase<>)).PropertiesAutowired();
             builder.RegisterGeneric(typeof(List<>)).As(typeof(IList<>)).PropertiesAutowired();
